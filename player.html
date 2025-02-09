@@ -9,21 +9,22 @@
 <body>
     <div class="player-container">
         <video id="my-video">
-            <source src="" type="video/mp4">
+            <!-- Fuente vacía se llenará dinámicamente -->
         </video>
     </div>
 
     <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
     <script>
-        // Obtener parámetros de la URL
+        // Obtener parámetros
         const urlParams = new URLSearchParams(window.location.search);
-        const videoLink = decodeURIComponent(urlParams.get('link') || '');
-        const vastTag = decodeURIComponent(urlParams.get('vastTag') || '');
+        const videoLink = urlParams.get('link') || '';
+        const vastTag = urlParams.get('vastTag') || '';
 
         // Configurar Fluid Player
         const player = fluidPlayer('my-video', {
             layoutControls: {
                 primaryColor: "#28a745",
+                fillToContainer: true,
                 allowDownload: false
             },
             vastOptions: {
@@ -31,11 +32,12 @@
             }
         });
 
-        // Cargar video
+        // Cargar video dinámicamente
         if (videoLink) {
-            const videoElement = document.querySelector('#my-video');
-            videoElement.src = videoLink;
-            player.load();
+            player.newSource({
+                src: videoLink,
+                type: 'video/mp4'
+            });
         }
     </script>
 </body>
