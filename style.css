@@ -57,4 +57,15 @@ textarea {
 .player-container {
     max-width: 800px;
     margin: 20px auto;
+/* Mantén los estilos anteriores y añade esto */
+.player-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    aspect-ratio: 16/9;
+}
+
+#my-video {
+    width: 100%;
+    height: 100%;
 }
