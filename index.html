@@ -11,7 +11,7 @@
         
         <div class="form-group">
             <label>Enlace del video (Google Drive o directo):</label>
-            <input type="text" id="videoLink" placeholder="Ej: https://drive.google.com/uc?export=download&id=ID_ARCHIVO">
+            <input type="text" id="videoLink" placeholder="Ej: https://drive.google.com/uc?id=ID_ARCHIVO">
         </div>
 
         <div class="form-group">
@@ -24,23 +24,30 @@
         <div id="result" class="hidden">
             <h3>Código Iframe:</h3>
             <textarea id="iframeCode" rows="3" readonly></textarea>
-            <p>Ejemplo de URL: <span id="urlExample"></span></p>
+            <p>Ejemplo de URL: <br><span id="urlExample"></span></p>
         </div>
     </div>
 
     <script>
         function generateIframe() {
-            const baseUrl = window.location.href.replace('index.html', 'player.html');
-            const videoLink = encodeURIComponent(document.getElementById('videoLink').value);
-            const vastTag = encodeURIComponent(document.getElementById('vastTag').value);
+            // Corregir URL base
+            const baseUrl = window.location.href.includes('index.html') 
+                ? window.location.href.replace('index.html', 'player.html')
+                : window.location.origin + '/player.html';
 
-            const params = [];
-            if (videoLink) params.push(`link=${videoLink}`);
-            if (vastTag) params.push(`vastTag=${vastTag}`);
+            // Codificar parámetros
+            const videoLink = document.getElementById('videoLink').value;
+            const vastTag = document.getElementById('vastTag').value;
+            
+            const params = new URLSearchParams();
+            if (videoLink) params.append('link', videoLink);
+            if (vastTag) params.append('vastTag', vastTag);
 
-            const finalUrl = `${baseUrl}?${params.join('&')}`;
+            // Generar URL final
+            const finalUrl = `${baseUrl}?${params.toString()}`;
             const iframeCode = `<iframe src="${finalUrl}" width="800" height="450" allowfullscreen></iframe>`;
 
+            // Mostrar resultados
             document.getElementById('iframeCode').value = iframeCode;
             document.getElementById('urlExample').textContent = finalUrl;
             document.getElementById('result').classList.remove('hidden');
