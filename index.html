@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Generador de Enlaces</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Video Player</h1>
+        
+        <div class="form-group">
+            <label>Enlace del video (Google Drive o directo):</label>
+            <input type="text" id="videoLink" placeholder="Ej: https://drive.google.com/uc?export=download&id=ID_ARCHIVO">
+        </div>
+
+        <div class="form-group">
+            <label>Etiqueta VAST (opcional):</label>
+            <input type="text" id="vastTag" placeholder="Ej: https://tudominio.com/ads.xml">
+        </div>
+
+        <button onclick="generateIframe()">Generar Enlace</button>
+
+        <div id="result" class="hidden">
+            <h3>Código Iframe:</h3>
+            <textarea id="iframeCode" rows="3" readonly></textarea>
+            <p>Ejemplo de URL: <span id="urlExample"></span></p>
+        </div>
+    </div>
+
+    <script>
+        function generateIframe() {
+            const baseUrl = window.location.href.replace('index.html', 'player.html');
+            const videoLink = encodeURIComponent(document.getElementById('videoLink').value);
+            const vastTag = encodeURIComponent(document.getElementById('vastTag').value);
+
+            const params = [];
+            if (videoLink) params.push(`link=${videoLink}`);
+            if (vastTag) params.push(`vastTag=${vastTag}`);
+
+            const finalUrl = `${baseUrl}?${params.join('&')}`;
+            const iframeCode = `<iframe src="${finalUrl}" width="800" height="450" allowfullscreen></iframe>`;
+
+            document.getElementById('iframeCode').value = iframeCode;
+            document.getElementById('urlExample').textContent = finalUrl;
+            document.getElementById('result').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
