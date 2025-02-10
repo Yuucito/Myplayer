@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generador de Videos con Fluid Player</title>
-    <link rel="stylesheet" href="style.css">
+    <title>GDrive Fluid Player</title>
+    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Generador de Videos con Fluid Player</h1>
-        <p>Ingrese un <strong>ID de Google Drive</strong> o un <strong>enlace MP4</strong>:</p>
-        <input type="text" id="videoInput" placeholder="ID de Google Drive o URL de video">
-        <button onclick="generateEmbed()">Generar Iframe</button>
-        
-        <p>Iframe generado:</p>
-        <textarea id="embedCode" readonly></textarea>
-
-        <h2>Vista previa:</h2>
-        <div id="video-container"></div>
-    </div>
+    <h1>Reproductor de Video Google Drive</h1>
+    <video id="videoPlayer" controls></video>
     <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoPlayer = document.getElementById("videoPlayer");
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoId = urlParams.get("id");
+
+            if (videoId) {
+                videoPlayer.src = `https://drive.google.com/uc?id=${videoId}&export=download`;
+                fluidPlayer("videoPlayer", {
+                    layoutControls: {
+                        primaryColor: "#ffcc00",
+                        fillToContainer: true
+                    }
+                });
+            } else {
+                alert("No se ha proporcionado un ID de video.");
+            }
+        });
+    </script>
 </body>
 </html>
