@@ -1,22 +1,19 @@
-document.getElementById("video-form").addEventListener("submit", function (e) {
-  e.preventDefault();
+function generateEmbed() {
+    let videoId = document.getElementById("videoId").value.trim();
+    if (!videoId) {
+        alert("Por favor, ingrese un ID de Google Drive.");
+        return;
+    }
 
-  // Obtener la URL del video ingresada por el usuario
-  const videoUrl = document.getElementById("video-url").value;
+    let videoUrl = `https://drive.google.com/uc?export=download&id=${videoId}`;
+    let embedCode = `<iframe src="player.html?video=${videoId}" width="640" height="360" frameborder="0" allowfullscreen></iframe>`;
+    
+    document.getElementById("embedCode").value = embedCode;
+    document.getElementById("video-container").innerHTML = `
+        <video id="video-player" controls>
+            <source src="${videoUrl}" type="video/mp4">
+        </video>
+    `;
 
-  // Validar que se haya ingresado una URL
-  if (!videoUrl) {
-    alert("Por favor, ingresa una URL válida.");
-    return;
-  }
-
-  // Generar la URL del iframe con la URL del video como parámetro
-  const iframeUrl = `https://yuucito.github.io/Myplayer/embed.html?video=${encodeURIComponent(videoUrl)}`;
-
-  // Mostrar el iframe en la vista previa
-  const iframePreview = document.getElementById("preview-iframe");
-  iframePreview.src = iframeUrl;
-
-  // Opcional: Mostrar la URL del iframe para copiar
-  alert(`Copia este iframe:\n<iframe src="${iframeUrl}" width="640" height="360" frameborder="0" allowfullscreen></iframe>`);
-});
+    fluidPlayer("video-player");
+}
