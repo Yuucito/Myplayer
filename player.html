@@ -13,12 +13,13 @@
 
     <script>
         const urlParams = new URLSearchParams(window.location.search);
-        const videoId = urlParams.get('video');
-        if (videoId) {
-            document.getElementById("video-source").src = `https://drive.google.com/uc?export=download&id=${videoId}`;
+        const videoUrl = urlParams.get('video');
+
+        if (videoUrl) {
+            document.getElementById("video-source").src = decodeURIComponent(videoUrl);
             fluidPlayer("video-player");
         } else {
-            document.body.innerHTML = "<p>Error: No se proporcionó un ID de video.</p>";
+            document.body.innerHTML = "<p>Error: No se proporcionó una URL de video.</p>";
         }
     </script>
 </body>
