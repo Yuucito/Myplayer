@@ -8,22 +8,29 @@
 </head>
 <body>
   <video id="video-player">
-    <!-- La URL del video se pasa como parámetro -->
-    <source src="{{VIDEO_URL}}" type="video/mp4" />
-  </video>
+    <script>
+  // Obtener la URL del video desde los parámetros de la URL
+  const params = new URLSearchParams(window.location.search);
+  const videoUrl = params.get("video");
 
-  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-  <script>
-    fluidPlayer("video-player", {
-      vastOptions: {
-        adList: [
-          {
-            roll: "preRoll", // Anuncio antes del video
-            vastTag: "URL_DEL_ANUNCIO_VAST",
-          },
-        ],
-      },
-    });
-  </script>
+  if (videoUrl) {
+    // Configurar el reproductor con la URL del video
+    document.querySelector("#video-player source").src = videoUrl;
+  } else {
+    console.error("No se proporcionó una URL de video.");
+  }
+
+  // Inicializar Fluid Player
+  fluidPlayer("video-player", {
+    vastOptions: {
+      adList: [
+        {
+          roll: "preRoll", // Anuncio antes del video
+          vastTag: "URL_DEL_ANUNCIO_VAST",
+        },
+      ],
+    },
+  });
+</script>
 </body>
 </html>
