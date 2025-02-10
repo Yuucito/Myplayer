@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Video</title>
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+</head>
+<body>
+    <video id="video-player" controls>
+        <source id="video-source" type="video/mp4">
+    </video>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const videoId = urlParams.get('video');
+        if (videoId) {
+            document.getElementById("video-source").src = `https://drive.google.com/uc?export=download&id=${videoId}`;
+            fluidPlayer("video-player");
+        } else {
+            document.body.innerHTML = "<p>Error: No se proporcionó un ID de video.</p>";
+        }
+    </script>
+</body>
+</html>
