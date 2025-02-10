@@ -10,13 +10,16 @@
 <body>
     <div class="container">
         <h1>Generador de Videos con Fluid Player</h1>
-        <input type="text" id="videoId" placeholder="Ingrese ID de Google Drive">
+        <p>Ingrese un <strong>ID de Google Drive</strong> o un <strong>enlace MP4</strong>:</p>
+        <input type="text" id="videoInput" placeholder="ID de Google Drive o URL de video">
         <button onclick="generateEmbed()">Generar Iframe</button>
+        
         <p>Iframe generado:</p>
         <textarea id="embedCode" readonly></textarea>
+
+        <h2>Vista previa:</h2>
         <div id="video-container"></div>
     </div>
-    <script src="config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
