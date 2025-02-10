@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor Incrustable</title>
+  <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" />
+</head>
+<body>
+  <video id="video-player">
+    <!-- La URL del video se pasa como parámetro -->
+    <source src="{{VIDEO_URL}}" type="video/mp4" />
+  </video>
+
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+  <script>
+    fluidPlayer("video-player", {
+      vastOptions: {
+        adList: [
+          {
+            roll: "preRoll", // Anuncio antes del video
+            vastTag: "URL_DEL_ANUNCIO_VAST",
+          },
+        ],
+      },
+    });
+  </script>
+</body>
+</html>
