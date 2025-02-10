@@ -3,28 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador de Video</title>
-  <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" />
+  <title>Generador de Iframe</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+    }
+    iframe {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
-  <h1>Reproductor de Video con Fluid Player</h1>
-  <video id="video-player">
-    <!-- Cambia la URL del video aquí -->
-    <source src="pixeldrain.com/api/file/tmMzuTHm" type="video/mp4" />
-  </video>
+  <h1>Generador de Iframe para Fluid Player</h1>
+  <form id="video-form">
+    <label for="video-url">URL del Video:</label>
+    <input type="text" id="video-url" placeholder="Ingresa la URL del video" required />
+    <button type="submit">Generar Iframe</button>
+  </form>
 
-  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
-  <script>
-    fluidPlayer("video-player", {
-      vastOptions: {
-        adList: [
-          {
-            roll: "preRoll", // Anuncio antes del video
-            vastTag: "URL_DEL_ANUNCIO_VAST",
-          },
-        ],
-      },
-    });
-  </script>
+  <h2>Vista Previa del Iframe:</h2>
+  <iframe id="preview-iframe" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+  <script src="script.js"></script>
 </body>
 </html>
