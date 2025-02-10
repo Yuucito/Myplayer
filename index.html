@@ -1,57 +1,30 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Generador de Enlaces</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Video</title>
+  <link rel="stylesheet" href="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>Generador de Video Player</h1>
-        
-        <div class="form-group">
-            <label>Enlace del video (Google Drive o directo):</label>
-            <input type="text" id="videoLink" placeholder="Ej: https://drive.google.com/uc?id=ID_ARCHIVO">
-        </div>
+  <h1>Reproductor de Video con Fluid Player</h1>
+  <video id="video-player">
+    <!-- Cambia la URL del video aquí -->
+    <source src="URL_DEL_VIDEO" type="video/mp4" />
+  </video>
 
-        <div class="form-group">
-            <label>Etiqueta VAST (opcional):</label>
-            <input type="text" id="vastTag" placeholder="Ej: https://tudominio.com/ads.xml">
-        </div>
-
-        <button onclick="generateIframe()">Generar Enlace</button>
-
-        <div id="result" class="hidden">
-            <h3>Código Iframe:</h3>
-            <textarea id="iframeCode" rows="3" readonly></textarea>
-            <p>Ejemplo de URL: <br><span id="urlExample"></span></p>
-        </div>
-    </div>
-
-    <script>
-        function generateIframe() {
-            // Corregir URL base
-            const baseUrl = window.location.href.includes('index.html') 
-                ? window.location.href.replace('index.html', 'player.html')
-                : window.location.origin + '/player.html';
-
-            // Codificar parámetros
-            const videoLink = document.getElementById('videoLink').value;
-            const vastTag = document.getElementById('vastTag').value;
-            
-            const params = new URLSearchParams();
-            if (videoLink) params.append('link', videoLink);
-            if (vastTag) params.append('vastTag', vastTag);
-
-            // Generar URL final
-            const finalUrl = `${baseUrl}?${params.toString()}`;
-            const iframeCode = `<iframe src="${finalUrl}" width="800" height="450" allowfullscreen></iframe>`;
-
-            // Mostrar resultados
-            document.getElementById('iframeCode').value = iframeCode;
-            document.getElementById('urlExample').textContent = finalUrl;
-            document.getElementById('result').classList.remove('hidden');
-        }
-    </script>
+  <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
+  <script>
+    fluidPlayer("video-player", {
+      vastOptions: {
+        adList: [
+          {
+            roll: "preRoll", // Anuncio antes del video
+            vastTag: "URL_DEL_ANUNCIO_VAST",
+          },
+        ],
+      },
+    });
+  </script>
 </body>
 </html>
