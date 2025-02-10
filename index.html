@@ -1,37 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Generador de Iframe</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    input, button {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      max-width: 400px;
-    }
-    iframe {
-      margin-top: 20px;
-      border: 1px solid #ccc;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Videos con Fluid Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.fluidplayer.com/v3/current/fluidplayer.min.js"></script>
 </head>
 <body>
-  <h1>Generador de Iframe para Fluid Player</h1>
-  <form id="video-form">
-    <label for="video-url">URL del Video:</label>
-    <input type="text" id="video-url" placeholder="Ingresa la URL del video" required />
-    <button type="submit">Generar Iframe</button>
-  </form>
-
-  <h2>Vista Previa del Iframe:</h2>
-  <iframe id="preview-iframe" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-  <script src="script.js"></script>
+    <div class="container">
+        <h1>Generador de Videos con Fluid Player</h1>
+        <input type="text" id="videoId" placeholder="Ingrese ID de Google Drive">
+        <button onclick="generateEmbed()">Generar Iframe</button>
+        <p>Iframe generado:</p>
+        <textarea id="embedCode" readonly></textarea>
+        <div id="video-container"></div>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
