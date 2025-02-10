@@ -16,7 +16,9 @@
         const videoUrl = urlParams.get('video');
 
         if (videoUrl) {
-            document.getElementById("video-source").src = decodeURIComponent(videoUrl);
+            let decodedUrl = decodeURIComponent(videoUrl);
+            document.getElementById("video-source").src = decodedUrl;
+            document.getElementById("video-player").load();
             fluidPlayer("video-player");
         } else {
             document.body.innerHTML = "<p>Error: No se proporcionó una URL de video.</p>";
