@@ -11,7 +11,7 @@ document.getElementById("video-form").addEventListener("submit", function (e) {
   }
 
   // Generar la URL del iframe con la URL del video como parámetro
-  const iframeUrl = `https://tuusuario.github.io/tuproyecto/embed.html?video=${encodeURIComponent(videoUrl)}`;
+  const iframeUrl = `https://yuucito.github.io/Myplayer/embed.html?video=${encodeURIComponent(videoUrl)}`;
 
   // Mostrar el iframe en la vista previa
   const iframePreview = document.getElementById("preview-iframe");
