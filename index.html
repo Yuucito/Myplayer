@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Reproductor HLS</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; }
+  label { display: block; margin-top: 10px; }
+  input { width: 100%; padding: 5px; }
+  textarea { width: 100%; height: 60px; }
+  #preview { margin-top: 20px; }
+</style>
+</head>
+<body>
+<h1>Generador de reproductor HLS</h1>
+<label>URL .m3u8
+  <input id="hls" type="text" placeholder="https://example.com/stream.m3u8">
+</label>
+<label>URL del banner
+  <input id="banner" type="text" placeholder="https://example.com/banner.jpg">
+</label>
+<label>URL de VAST
+  <input id="vast" type="text" placeholder="https://example.com/vast.xml">
+</label>
+<button onclick="generate()">Generar iframe</button>
+<textarea id="code" readonly></textarea>
+<div id="preview"></div>
+<script>
+function generate() {
+  const hls = encodeURIComponent(document.getElementById('hls').value.trim());
+  const banner = encodeURIComponent(document.getElementById('banner').value.trim());
+  const vast = encodeURIComponent(document.getElementById('vast').value.trim());
+  const src = `player.html?src=${hls}&banner=${banner}&vast=${vast}`;
+  const iframe = `<iframe src="${src}" width="640" height="360" frameborder="0" allowfullscreen></iframe>`;
+  document.getElementById('code').value = iframe;
+  document.getElementById('preview').innerHTML = iframe;
+}
+</script>
+</body>
+</html>
